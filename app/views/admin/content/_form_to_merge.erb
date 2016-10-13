@@ -1,6 +1,6 @@
   <h4> Merge Articles </h4>
   <%= form_tag({:controller => "admin/content", :action => "merge", :id => @article.id }, :method => "post") do %>
     <%= content_tag(:p, "Article ID", :style => "display: inline;") %>
-    <%= text_field_tag(:merge_article, "", :style => "display: inline;") %>
+    <%= text_field_tag(:merge_with, "", :style => "display: inline;") %>
     <div> <%= submit_tag("Merge") %> </div>
   <% end %>
