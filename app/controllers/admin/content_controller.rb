@@ -13,7 +13,7 @@ class Admin::ContentController < Admin::BaseController
 
   def merge
     myID = params[:id]
-    otherID = params[:merge_article]
+    otherID = params[:merge_with]
     if otherID != nil && myID != otherID && Article.find_by_id(myID) && Article.find_by_id(otherID)
       Article.merge(Article.find(myID), Article.find(otherID))
       flash[:notice] = _("Successfully merged articles #{myID} and #{otherID}!")
