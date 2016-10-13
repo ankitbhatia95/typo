@@ -72,11 +72,17 @@ class Article < Content
   end
 
   # Method to merge two articles.
-  def self.merge(myArticle, otherArticle)
+  def self.merge(myID, otherID)
+    myArticle = Article.find_by_id(myID)
+    otherArticle = Article.find_by_id(otherID)
+    otherComments = otherArticle.comments
+
     myArticle.body += otherArticle.body
-    myArticle.comments << otherArticle.comments
+    myArticle.comments << otherComments
+
     myArticle.save!
-    otherArticle.destroy
+    Article.find(otherID).destroy
+    
   end
    
   def set_permalink
