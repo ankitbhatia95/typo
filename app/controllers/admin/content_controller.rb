@@ -11,6 +11,19 @@ class Admin::ContentController < Admin::BaseController
     render :inline => "<%= raw auto_complete_result @items, 'name' %>"
   end
 
+  def merge
+    myID = params[:id]
+    otherID = params[:merge_article]
+    if otherID != nil && myID != otherID && Article.find_by_id(myID) && Article.find_by_id(otherID)
+      Article.merge(Article.find(myID), Article.find(otherID))
+      flash[:notice] = _("Successfully merged articles #{myID} and #{otherID}!")
+    else
+      flash[:notice] = _("Could not merge articles #{myID} and #{otherID}!")
+    end
+    redirect_to :action => 'index'
+  end
+
+
   def index
     @search = params[:search] ? params[:search] : {}
     
@@ -165,7 +178,6 @@ class Admin::ContentController < Admin::BaseController
     if request.post?
       set_article_author
       save_attachments
-      
       @article.state = "draft" if @article.draft
 
       if @article.save

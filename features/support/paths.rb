@@ -24,6 +24,15 @@ module NavigationHelpers
     when /^the edit category page for "General"$/
       '/admin/categories/edit/1'
 
+    when /^edit the first article$/
+      '/admin/content/edit/1'
+
+    when /^the articles page$/
+      '/admin/content'
+
+    when /^the login page$/
+      '/accounts/login'
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

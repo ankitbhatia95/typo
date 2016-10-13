@@ -71,6 +71,14 @@ class Article < Content
     end
   end
 
+  # Method to merge two articles.
+  def self.merge(myArticle, otherArticle)
+    myArticle.body += otherArticle.body
+    myArticle.comments << otherArticle.comments
+    myArticle.save!
+    otherArticle.destroy
+  end
+   
   def set_permalink
     return if self.state == 'draft'
     self.permalink = self.title.to_permalink if self.permalink.nil? or self.permalink.empty?
